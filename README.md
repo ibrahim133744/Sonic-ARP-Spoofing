@@ -1,6 +1,6 @@
-# SonicARP - Network Tool Demonstration by ibrahim
+# Sonic ARP Spoofing by IBRAHIM [v1.3 - Auto Attack]
 
-**Developer:** ibrahim (PROFILE](https://github.com/ibrahim133744))
+**Developer:** ibrahim ([GitHub Profile](https://github.com/ibrahim133744))
 
 **Technologies:** Python 3, Scapy, Tkinter (ttk, ttkthemes)
 
@@ -16,96 +16,83 @@
 
 ---
 
+## Disclaimer of Responsibility
+
+**The developer (ibrahim) is NOT RESPONSIBLE for any damages, network disruptions, legal consequences, or any other negative outcome resulting from the use or misuse of this software.** This tool is provided solely for educational demonstration. By using this software, you acknowledge that you understand the risks and that you are solely responsible for your actions and for ensuring you have explicit permission to test on any given network. **If you misuse this tool, YOU ALONE BEAR THE CONSEQUENCES.**
+
+---
+
 ## Description
 
-SonicARP is a project showcasing the implementation of ARP spoofing using Python. It utilizes **Scapy** for low-level network packet crafting and manipulation, and **Tkinter** (with `ttk` and `ttkthemes`) for the graphical user interface.
+SonicARP [v1.3] is a project demonstrating ARP spoofing using Python. It utilizes **Scapy** for network packet manipulation and **Tkinter** (with `ttkthemes`) for the graphical user interface.
 
-The tool provides basic functionalities for:
-*   Attempting automatic detection of local network parameters (IP, MAC, Gateway, Network Range).
-*   Scanning the local network using ARP requests to discover active devices.
-*   Performing an **automatic ARP spoofing attack** against **all** discovered devices (excluding the user's machine and the gateway).
-*   Optionally poisoning the gateway's ARP cache as well (for potential Man-in-the-Middle setup analysis - actual interception requires separate tools).
-*   Attempting to restore the ARP tables of targeted devices upon stopping the attack.
-*   Logging activities within the GUI.
+**Functionality of this version:**
+*   Attempts automatic detection of local network parameters.
+*   Scans the local network using ARP requests to discover active devices.
+*   Performs an **automatic ARP spoofing attack** against **ALL** discovered devices (excluding the user's machine and the gateway). **Note: This version attacks all found devices automatically, selective targeting is not implemented.**
+*   Optionally poisons the gateway's ARP cache as well (for potential MitM setup analysis).
+*   Attempts to restore the ARP tables of targeted devices upon stopping the attack.
+*   Logs activities within the GUI.
+*   Includes a link to the developer's GitHub profile in the status bar.
 
-This project was developed primarily for learning purposes related to network programming, packet manipulation with Scapy, and GUI development with Tkinter. It is **not intended as a polished, production-ready utility** but rather as a functional demonstration of the concepts involved.
+This project was developed primarily for learning purposes. The source code is made visible for review and demonstration purposes.
+
+---
 
 ## Prerequisites
 
-Before running SonicARP, ensure you have the following:
+To run SonicARP [v1.3], you need:
 
-1.  **Python 3.x:** Recommended version 3.7 or higher.
-2.  **pip:** The Python package installer (usually comes with Python).
-3.  **Npcap:** **ESSENTIAL** packet capture library for Windows. Scapy relies on this for sending and receiving raw packets.
+1.  **Npcap Installation:** You **MUST** install the Npcap library first.
     *   Download from: [https://npcap.com/](https://npcap.com/)
-    *   **During installation:** Make sure to check the option **"Support WinPcap API-compatible mode"**.
-4.  **Administrator Privileges:** The script or the compiled `.exe` **MUST** be executed with administrator rights to allow Scapy access to raw sockets and network interfaces.
+    *   **Crucial:** During installation, ensure **"Support WinPcap API-compatible mode"** is **checked**.
+2.  **Administrator Privileges:** The executable or script **MUST** be run with administrator rights.
+3.  **(If running from source code):** Python 3.x (e.g., 3.7+) and the required libraries (`pip install scapy ttkthemes`).
 
-## Installation
+---
 
-1.  **Clone or Download:**
-    *   Clone the repository: `git clone https://github.com/vas_username/SonicARP.git` (Zamenite URL pravim!)
-    *   Or download the ZIP file from GitHub and extract it.
-2.  **Navigate to Directory:**
-    Open a terminal or command prompt and change to the project directory: `cd path/to/SonicARP`
-3.  **Install Dependencies:**
-    It's highly recommended to use a Python virtual environment (`venv`).
-    ```bash
-    # Create virtual environment (optional but recommended)
-    python -m venv venv
-    # Activate virtual environment
-    # Windows:
-    .\venv\Scripts\activate
-    # Linux/macOS:
-    source venv/bin/activate
+## Running SonicARP [v1.3]
 
-    # Install required packages
-    pip install scapy ttkthemes ipaddress
-    ```
-    *(Note: `ipaddress` is built-in with Python 3.3+ but listing it doesn't hurt).*
-4.  **Install Npcap:** Make sure Npcap is installed as described in the Prerequisites section.
+**Option 1: Using the Pre-compiled Executable (.exe)**
 
-## Usage Guide
+1.  **Download:** Get the `SonicARPSpoofing_by_IBRAHIM.exe` file (or similar name you used).
+    *   *(You will need to build this yourself using PyInstaller and the corresponding v1.3 source code. Consider uploading it to GitHub Releases if sharing).*
+2.  **Ensure Npcap is installed** (see Prerequisites).
+3.  **Run:** Right-click `SonicARPSpoofing_by_IBRAHIM.exe` and select "**Run as administrator**".
 
-1.  **Run as Administrator:**
-    *   **Windows:** Right-click on your terminal (Command Prompt, PowerShell) and select "Run as administrator".
-    *   **Linux/macOS:** Use `sudo`.
-2.  **Launch the Script:**
-    From the administrator terminal within the project directory (and with the virtual environment activated, if used):
-    ```bash
-    python sonic_arp.py
-    ```
-    *(Replace `sonic_arp.py` with the actual name of your Python script if different).*
-3.  **Interface Overview:**
-    *   **Controls (Left Panel):** Buttons for scanning, starting/stopping the attack, and the gateway poisoning option. Also includes the critical warning.
-    *   **Found Devices (Top Right):** Listbox where discovered devices will appear after a scan.
-    *   **Activity Log (Bottom Right):** Shows status messages, errors, and attack progress.
-    *   **Status Bar (Bottom):** Displays the current status and developer credit.
-4.  **Workflow:**
-    *   **Step 1: Scan Network:** Click `📡 Scan Network`. The tool will try to find devices on your local network using ARP. Wait for the scan to complete. Found devices (potential targets) will populate the list.
-    *   **Step 2 (Optional): Poison Gateway:** If you intend to attempt a Man-in-the-Middle attack (requires separate tools for traffic analysis), check the `Poison Gateway (MitM)` box. By default, SonicARP only poisons the clients *about* the gateway.
-    *   **Step 3: Start Attack:** Click `🚀 Start AUTO Attack`. **WARNING:** This will immediately begin sending ARP spoof packets to **ALL** devices listed in the "Found Devices" list.
-    *   **Step 4: Stop Attack:** When finished, click `✅ Stop Attack`. The tool will cease sending spoof packets and attempt to send corrective ARP packets to restore the ARP tables of the targeted devices and the gateway (if poisoned).
+**Option 2: Running from Source Code**
 
-## Building the .exe (Optional)
+1.  **Ensure Prerequisites are met** (Python, pip, Npcap, Admin rights).
+2.  **Download/Clone** the source code for this version.
+3.  **Install dependencies:** `pip install scapy ttkthemes`
+4.  **Run:** Open an **administrator** terminal, navigate to the code directory, and run `python your_script_name_v1.3.py` (replace with your actual filename).
 
-If you want a standalone executable (requires PyInstaller):
+---
 
-1.  **Install PyInstaller:** `pip install pyinstaller`
-2.  **Prepare Icon:** Place an icon file (e.g., `sonic_icon.ico`) in the project directory.
-3.  **Run PyInstaller:** From an **administrator** terminal in the project directory:
-    ```bash
-    pyinstaller --onefile --windowed --icon="sonic_icon.ico" --name="SonicARP_by_ibrahim" sonic_arp.py
-    ```
-    *(Adjust icon and script names as needed).*
-4.  **Find Executable:** The `.exe` file will be located in the `dist` sub-directory.
-5.  **IMPORTANT:** Even when using the `.exe`, the target computer **must still have Npcap installed correctly**, and the `.exe` **must be run as administrator**. Antivirus software might also flag the executable.
+## Usage Guide (v1.3 Interface)
 
-## Disclaimer
+1.  **Scan Network:** Click `📡 Scan Network` to find devices.
+2.  **Review Devices:** Found devices (targets) appear in the list. **Remember, clicking Start will attack ALL of them.**
+3.  **(Optional) Poison Gateway:** Check the box if desired.
+4.  **Start Attack:** Click `🚀 Start AUTO Attack`. The attack on ALL devices begins immediately.
+5.  **Stop Attack:** Click `✅ Stop Attack & Restore` to stop spoofing and attempt ARP table restoration.
 
-This software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+---
 
-## License
+## Copyright and Permissions
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
-*(Make sure you have a file named LICENSE containing the MIT license text in your repository if you select this)*.
+**Copyright (c) 2024 ibrahim. All Rights Reserved.** *(<- Zameni godinu ako treba)*
+
+The source code for SonicARP is made publicly visible for demonstration and educational review purposes only.
+
+**You are granted permission to:**
+*   View and inspect the source code.
+*   Run the software **strictly** in accordance with the warnings and prerequisites mentioned above.
+
+**You are explicitly NOT granted permission to:**
+*   Copy, modify, or distribute the source code or the executable file.
+*   Create derivative works based on this code.
+*   Use this software or parts of its code for commercial purposes.
+*   Re-license this software under any other terms.
+
+Any use beyond viewing and the limited execution permission described requires **explicit written consent** from the author (ibrahim).
