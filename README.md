@@ -1,6 +1,6 @@
 # SonicARP - Network Tool Demonstration by ibrahim
 
-**Developer:** ibrahim ([Link do vašeg GitHub profila - ZAMENITE OVO!](https://github.com/vas_username))
+**Developer:** ibrahim (PROFILE](https://github.com/ibrahim133744))
 
 **Technologies:** Python 3, Scapy, Tkinter (ttk, ttkthemes)
 
