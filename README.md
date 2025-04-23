@@ -1,6 +1,6 @@
 # Sonic ARP Spoofing by IBRAHIM [v4.1 - Fixes]
 
-[![Download EXE (Windows)](https://img.shields.io/badge/⬇️%20DOWNLOAD%20EXE%20NOW-blue?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/ibrahim133744/Sonic-ARP-Spoofing/releases/download/Sonic/SonicARP_v4.1.exe)
+[![Download EXE (Windows)](https://img.shields.io/badge/⬇️%20DOWNLOAD%20EXE%20NOW-blue?style=for-the-badge&logo=windows&logoColor=white)](https://github.com/ibrahim133744/Sonic-ARP-Spoofing/releases/tag/Sonic)
 
 **Developer:** ibrahim ([GitHub Profile](https://github.com/ibrahim133744))
 
